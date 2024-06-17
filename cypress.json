@@ -8,7 +8,7 @@
     "reporterOptions": {
         "reportDir": "cypress/report",
         "charts": true,
-        "reportPageTitle": "Joan Media Demo Report",
+        "reportPageTitle": "Dexter Demo Report",
         "embeddedScreenshots": true
       }
 
