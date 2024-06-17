@@ -14,7 +14,6 @@ pipeline {
     environment {
         BUILD_USER = ''
         NODE_VERSION = '14.17.0' // You can specify the version of Node.js you need
-        SLACK_CREDENTIALS = credentials('slack-token-id') // Ensure you have added the token in Jenkins credentials with this ID
     }
     parameters {
         string(name: 'SPEC', defaultValue: 'cypress/integration/**/**', description: 'Ej: cypress/integration/pom/*.spec.js')
@@ -80,12 +79,6 @@ pipeline {
             script {
                 BUILD_USER = getBuildUser()
             }
-            slackSend(
-                channel: '#jenkins-example',
-                color: COLOR_MAP[currentBuild.currentResult],
-                message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} by ${BUILD_USER}\n Tests: ${params.SPEC} executed at ${params.BROWSER} \n More info at: ${env.BUILD_URL}HTML_20Report/",
-                token: "${env.SLACK_CREDENTIALS}"
-            )
             publishHTML([
                 allowMissing: false,
                 alwaysLinkToLastBuild: false,
